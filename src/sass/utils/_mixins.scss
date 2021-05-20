@@ -1,0 +1,53 @@
+@mixin clearFloat {
+  &:before,
+  &:after {
+    content: "";
+    display: table;
+  }
+
+  &:after {
+    clear: both;
+  }
+}
+
+@mixin flexCenter {
+  display: flex;
+  justify-items: center;
+  align-items: center;
+}
+
+// media query
+
+// change order: base, typography, general layout, grid, page layout, components
+
+@mixin mediaLayout($breakPoint) {
+  // note: 1em = 16px is ALWASY, so useing "em" here instead of "rem"
+
+  // min-width: greater or equal to, then appliy content css
+  // max-width: less or equal to, then apply content css
+  @if $breakPoint == phone {
+    @media (max-width: 37.5em) {
+      //600px
+      @content;
+    }
+  }
+  @if $breakPoint == tab-port {
+    @media (max-width: 56.25em) {
+      // 900px
+      @content;
+    }
+  }
+
+  @if $breakPoint == tab-land {
+    // 1200px
+    @media (max-width: 75em) {
+      @content;
+    }
+  }
+  @if $breakPoint == big-desktop {
+    // 1800px
+    @media (min-width: 112.5em) {
+      @content;
+    }
+  }
+}
